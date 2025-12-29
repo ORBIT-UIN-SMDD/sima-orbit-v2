@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('event_attendances', function (Blueprint $table) {
             $table->id();
-             $table->string('code')->unique();
-            $table->foreignId('event_id')->constrained('event')->onDelete('cascade');
+            $table->string('code')->unique();
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->dateTime('start_datetime')->nullable();
