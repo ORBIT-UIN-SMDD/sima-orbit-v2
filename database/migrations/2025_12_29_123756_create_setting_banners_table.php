@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('url');
             $table->boolean('status')->default(1);
             $table->timestamps();
+
+            $table->index('status');
+            $table->index('title');
         });
     }
 

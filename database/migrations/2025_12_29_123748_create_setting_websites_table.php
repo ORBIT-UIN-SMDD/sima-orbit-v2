@@ -33,6 +33,8 @@ return new class extends Migration
             $table->longText('terms_conditions')->nullable();
             $table->longText('privacy_policy')->nullable();
             $table->timestamps();
+
+            $table->index('name');
         });
     }
 

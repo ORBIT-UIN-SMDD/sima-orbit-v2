@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
             $table->timestamps();
+
+            $table->index('name');
+            $table->index('slug');
         });
     }
 

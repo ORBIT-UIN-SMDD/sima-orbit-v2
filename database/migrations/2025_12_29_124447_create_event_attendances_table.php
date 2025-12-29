@@ -20,6 +20,9 @@ return new class extends Migration
             $table->dateTime('start_datetime')->nullable();
             $table->dateTime('end_datetime')->nullable();
             $table->timestamps();
+
+            $table->index('event_id');
+            $table->index('code');
         });
     }
 

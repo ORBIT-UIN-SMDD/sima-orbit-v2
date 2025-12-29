@@ -22,6 +22,10 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->index('status');
+            $table->index('news_id');
+            $table->index('user_id');
         });
     }
 

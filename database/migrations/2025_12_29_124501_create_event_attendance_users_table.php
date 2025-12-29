@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('ip_address')->nullable(); // IP address of the user when marking attendance
             $table->string('user_agent')->nullable(); // User agent string for device information
             $table->timestamps();
+
+            $table->index('event_attendance_id');
+            $table->index('event_user_id');
         });
     }
 

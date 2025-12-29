@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('email')->nullable(); // Optional email for the user in the context of the event
             $table->string('phone')->nullable(); // Optional phone number for the user in the context of the event
             $table->timestamps();
+
+            $table->index('event_id');
+            $table->index('user_id');
         });
     }
 
