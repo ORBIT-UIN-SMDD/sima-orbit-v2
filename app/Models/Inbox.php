@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Department extends Model
+class Inbox extends Model
 {
      use LogsActivity;
 
@@ -17,9 +17,5 @@ class Department extends Model
         ->logOnlyDirty()
         ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName}");
     }
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }
