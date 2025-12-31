@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\AboutUs;
+use App\Models\MemberField;
 use App\Models\News;
 use App\Models\NewsCategory;
 use App\Models\SettingBanner;
@@ -44,7 +46,7 @@ class DatabaseSeeder extends Seeder
         SettingBanner::create([
             'title' => 'Organisasi Berbasis IT (ORBIT)',
             'subtitle' => 'Organisasi yang bergerak di bidang teknologi informasi dan komunikasi di lingkungan UIN Sjech M. Djamil Djambek Bukittinggi',
-            'image' => 'setting/banner/vC5qyP6SqARhMTDtFaUm.png',
+            'image' => 'https://placehold.co/1920x1080/png',
             'url' => 'https://uinbukittinggi.ac.id',
         ]);
         NewsCategory::create([
@@ -64,6 +66,28 @@ class DatabaseSeeder extends Seeder
             'meta_title' => 'ORBIT Gelar Workshop Teknologi untuk Mahasiswa UIN Bukittinggi',
             'meta_description' => 'ORBIT UIN Bukittinggi mengadakan workshop teknologi untuk meningkatkan literasi digital dan inovasi mahasiswa.',
             'meta_keywords' => 'orbit; workshop; teknologi; mahasiswa; uin bukittinggi',
+        ]);
+
+        AboutUs::create([
+            'name' => 'Tentang ORBIT UIN Bukittinggi',
+            'content' => '<p><strong>Organisasi Berbasis IT (ORBIT)</strong> adalah sebuah organisasi yang bergerak di bidang teknologi informasi dan komunikasi di lingkungan UIN Sjech M. Djamil Djambek Bukittinggi. ORBIT bertujuan untuk mengembangkan potensi mahasiswa dalam bidang IT serta memberikan kontribusi positif bagi masyarakat melalui inovasi teknologi.</p><p>Sejak didirikan pada tahun 2020, ORBIT telah melaksanakan berbagai kegiatan seperti workshop, seminar, dan pelatihan yang berkaitan dengan teknologi informasi. Organisasi ini juga aktif dalam mengembangkan aplikasi dan solusi digital yang bermanfaat bagi civitas akademika UIN Bukittinggi.</p><p>Dengan semangat kolaborasi dan inovasi, ORBIT terus berupaya menjadi pionir dalam pengembangan teknologi di lingkungan kampus serta memberikan dampak positif bagi masyarakat luas.</p>',
+        ]);
+
+        MemberField::create([
+            'name' => 'Programming',
+            'description' => 'Bidang yang fokus pada pengembangan perangkat lunak dan aplikasi.',
+        ]);
+        MemberField::create([
+            'name' => 'Multimedia',
+            'description' => 'Bidang yang berkaitan dengan desain grafis, video editing, dan produksi konten digital.',
+        ]);
+        MemberField::create([
+            'name' => 'Networking',
+            'description' => 'Bidang yang menangani infrastruktur jaringan dan komunikasi data.',
+        ]);
+        MemberField::create([
+            'name' => 'Robotics',
+            'description' => 'Bidang yang mempelajari dan mengembangkan teknologi robotika.',
         ]);
     }
 }

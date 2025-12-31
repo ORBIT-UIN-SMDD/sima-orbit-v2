@@ -22,4 +22,9 @@ class Department extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
 }

@@ -18,4 +18,9 @@ class NewsCategory extends Model
         ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName}");
     }
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function news()
+    {
+        return $this->hasMany(News::class, 'news_category_id');
+    }
 }
