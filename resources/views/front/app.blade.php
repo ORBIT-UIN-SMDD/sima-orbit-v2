@@ -28,11 +28,11 @@
 
 <body data-mobile-nav-style="full-screen-menu" data-mobile-nav-bg-color="#252840">
     <!-- start header -->
-    @include('front.partials.header')
+    @include('front.layouts.header')
     <!-- end header -->
     @yield('content')
     <!-- start footer -->
-    @include('front.partials.footer')
+    @include('front.layouts.footer')
     <!-- end footer -->
     <!-- start scroll progress -->
     <div class="scroll-progress d-none d-xxl-block">

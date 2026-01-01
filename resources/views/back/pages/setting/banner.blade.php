@@ -174,7 +174,7 @@
                 // Create form and submit
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = `{{ route('back.setting.banner-delete', '') }}/${bannerId}`;
+                form.action = `{{ route('back.setting.banner-delete', ' ') }}/${bannerId}`;
                 form.innerHTML = `
                     @csrf
                     @method('DELETE')

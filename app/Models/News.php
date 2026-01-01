@@ -41,6 +41,9 @@ class News extends Model
     }
 
     public function getThumbnail(){
+        if ($this->thumbnail && (str_starts_with($this->thumbnail, 'http://') || str_starts_with($this->thumbnail, 'https://'))) {
+            return $this->thumbnail;
+        }
         return $this->thumbnail ? Storage::url($this->thumbnail) : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
     }
 }
