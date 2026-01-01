@@ -29,6 +29,12 @@ class HomeController extends Controller
             'about_us' => AboutUs::all(),
             'list_announcement' => Announcement::latest()->where('is_active', true)->limit(8)->get(),
             'list_event' => Event::latest()->where('is_active', true)->where('access', 'terbuka')->limit(8)->get(),
+            'count_member_field' => MemberField::count(),
+            'count_user_member_active' => 100,
+            'count_user_member_admin' => 10,
+            'count_user_member_alumnus' => 50,
+
+            'setting_web' => $setting_web,
         ];
         return view('front.pages.home.index', $data);
     }

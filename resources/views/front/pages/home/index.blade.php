@@ -4,6 +4,7 @@
 @endsection
 
 @section('styles')
+{{-- <link rel="stylesheet" href="{{ asset('front/css/application.css') }}"> --}}
 @endsection
 
 @section('content')
@@ -75,7 +76,7 @@
 
 
     <section class="bg-gradient-solitude-blue-transparent pt-0 ps-10 pe-10 xl-ps-2 xl-pe-2 sm-mx-0 pt-5">
-      
+
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
@@ -157,7 +158,7 @@
                     </div>
                     <div class="feature-box-content">
                         <h2 class="d-inline-block align-middle counter-number fw-700 text-white mb-0 counter"
-                            data-speed="2000" data-to="2350"></h2>
+                            data-speed="2000" data-to="{{ $count_member_field }}"></h2>
                         <span class="d-block text-white fw-500">Bidang</span>
                     </div>
                 </div>
@@ -169,7 +170,7 @@
                     </div>
                     <div class="feature-box-content">
                         <h2 class="d-inline-block align-middle counter-number fw-700 text-white mb-0 counter"
-                            data-speed="2000" data-to="3200"></h2>
+                            data-speed="2000" data-to="{{ $count_user_member_active }}"></h2>
                         <span class="d-block text-white fw-500">Anggota Aktif</span>
                     </div>
                 </div>
@@ -181,7 +182,7 @@
                     </div>
                     <div class="feature-box-content">
                         <h2 class="d-inline-block align-middle counter-number fw-700 text-white mb-0 counter"
-                            data-speed="2000" data-to="2545"></h2>
+                            data-speed="2000" data-to="{{ $count_user_member_admin }}"></h2>
                         <span class="d-block text-white fw-500">Pengurus</span>
                     </div>
                 </div>
@@ -193,7 +194,7 @@
                     </div>
                     <div class="feature-box-content last-paragraph-no-margin">
                         <h2 class="d-inline-block align-middle counter-number fw-700 text-white mb-0 counter"
-                            data-speed="2000" data-to="3650"></h2>
+                            data-speed="2000" data-to="{{ $count_user_member_alumnus }}"></h2>
                         <span class="d-block text-white fw-500">Alumni</span>
                     </div>
                 </div>
@@ -221,7 +222,7 @@
     <!-- end section -->
 
     <!-- start section -->
-    <section class="bg-spring-wood position-relative overflow-hidden">
+    <section class="bg-very-light-gray position-relative overflow-hidden">
         <div class="position-absolute right-minus-50px top-50px d-none d-lg-inline-block"
             data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
             <img src="https://craftohtml.themezaa.com/images/demo-spa-salon-bg-img-02.png" alt="">
@@ -235,11 +236,13 @@
             <div class="row align-items-center mb-5 sm-mb-30px text-center text-lg-start"
                 data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay":0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                 <div class="col-lg-5 md-mb-30px">
-                    <h3 class="text-dark-gray fw-700 ls-minus-2px mb-0">Understanding the business services.</h3>
+                    <h3 class="text-dark-gray fw-700 ls-minus-2px mb-0">Kegiatan Mentoring bidang</h3>
                 </div>
                 <div class="col-lg-4 offset-xl-1 last-paragraph-no-margin md-mb-30px">
-                    <p>We strive to develop real-world web solutions that are ideal for small to large projects with bespoke
-                        your custom project requirements.</p>
+                    <p>
+                        Kami menyediakan program mentoring yang dirancang khusus untuk membantu anggota kami
+                        mengembangkan keterampilan dan pengetahuan di berbagai bidang yang diminati.
+                    </p>
                 </div>
                 <div class="col-xl-2 col-lg-3 d-flex justify-content-center">
                     <!-- start slider navigation -->
@@ -558,43 +561,55 @@
     </section>
     <!-- end section -->
 
-    <!-- start section -->
-    <section class="cover-background one-third-screen sm-h-500px pb-0 position-relative"
-        style="background-image:url('https://placehold.co/1920x760');">
-        <div class="opacity-extra-medium bg-dark-gray"></div>
-        <div class="container h-100">
-            <div class="row align-items-center justify-content-center h-100">
-                <div class="col-xl-8 col-lg-10 mb-9 md-mb-15 position-relative z-index-1 text-center d-flex flex-wrap align-items-center justify-content-center"
-                    data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                    <span
-                        class="ps-25px pe-25px pt-5px pb-5px mb-25px text-uppercase text-white fs-12 ls-1px fw-600 border-radius-100px bg-gradient-dark-gray-transparent d-inline-flex align-items-center text-start sm-lh-20"><i
-                            class="bi bi-megaphone text-white d-inline-block align-middle icon-small me-10px"></i> Let's
-                        make something great work together.</span>
-                    <h1 class="text-white fw-600 ls-minus-2px mb-50px">We make the creative solutions for business!</h1>
-                    <a href="#"
-                        class="btn btn-extra-large btn-switch-text btn-gradient-purple-pink btn-rounded me-10px">
-                        <span>
-                            <span class="btn-double-text" data-text="Got a project in mind">Got a project in mind</span>
-                            <span><i class="fa-solid fa-arrow-right"></i></span>
-                        </span>
-                    </a>
+     <section class="bg-white">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-xl-6 col-lg-7 col-md-8 text-center"
+                    data-anime='{ "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    <span class="fw-600 ls-1px fs-16 alt-font d-inline-block text-uppercase mb-5px text-base-color">Konten
+                        Instagram</span>
+                    <h2 class="alt-font text-dark-gray fw-600 ls-minus-2px">Instagram Feed</h2>
                 </div>
             </div>
-        </div>
-        <div class="shape-image-animation p-0 w-100 bottom-minus-40px xl-bottom-0px d-none d-md-block">
-            <svg xmlns="http://www.w3.org/2000/svg" widht="3000" height="400" viewBox="0 180 2500 200"
-                fill="#ffffff">
-                <path class="st1" d="M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250">
-                    <animate attributeName="d" dur="5s"
-                        values="M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250;
-                            M 0 250 C 400 50 400 400 3000 250 L 3000 550 L 0 550 L 0 250;
-                            M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250"
-                        repeatCount="indefinite" />
-                </path>
-            </svg>
+            <div class="tagembed-widget" style="width:100%;height:100%;overflow:auto;" data-widget-id="312588" data-website="1"></div><script src="https://widget.tagembed.com/embed.min.js" type="text/javascript"></script>
+
         </div>
     </section>
-    <!-- end section -->
+
+<!-- start section -->
+        <section class="overflow-hidden position-relative bg-very-light-gray py-0 lg-pt-8 lg-pb-8">
+            <div id="particles-style-02" class="h-100 position-absolute left-0px top-0 w-100" data-particle="true" data-particle-options='{"particles": {"number": {"value": 18,"density": {"enable": true,"value_area": 2000}},"color": {"value": ["#8f76f5", "#a65cef", "#c74ad2", "#e754a4", "#ff6472"]},"shape": {"type": "circle","stroke":{"width":0,"color":"#000000"}},"opacity": {"value": 0.3,"random": false,"anim": {"enable": false,"speed": 1,"sync": false}},"size": {"value": 8,"random": true,"anim": {"enable": false,"sync": true}},"line_linked":{"enable":false,"distance":0,"color":"#ffffff","opacity":0.4,"width":1},"move": {"enable": true,"speed":1,"direction": "right","random": false,"straight": false}},"interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": false,"mode": "repulse"},"onclick": {"enable": false,"mode": "push"},"resize": true}},"retina_detect": false}'></div>
+            <div class="container">
+                <div class="row align-items-center ps-50px pe-50px lg-px-0 position-relative z-index-1 justify-content-md-center">
+                    <div class="col-lg-6 md-mb-50px">
+                        <div class="row">
+                            <div class="col-sm-6 xs-mb-30px">
+                                <img src="https://craftohtml.themezaa.com/images/demo-application-home-06.jpg" class="w-100 box-shadow-quadruple-large border-radius-10px" data-bottom-top="transform: translateY(-250px)" data-top-bottom="transform: translateY(200px)" alt="">
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="https://craftohtml.themezaa.com/images/demo-application-home-07.jpg" class="w-100 box-shadow-quadruple-large border-radius-10px" data-bottom-top="transform: translateY(200px)" data-top-bottom="transform: translateY(-300px)" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 offset-lg-1 col-md-8 text-center text-lg-start">
+                        <h3 class="fw-800 text-dark-gray ls-minus-1px">Download Aplikasi SIMA-ORBIT Sekarang!</h3>
+                        <span class="fs-18 w-80 xl-w-100 d-block mb-35px">
+                            Nikmati kemudahan mengakses informasi dan layanan UKM ORBIT langsung dari perangkat
+                            Anda dengan aplikasi mobile kami.
+                        </span>
+                        <div class="row pe-20px xl-pe-0 justify-content-center justify-content-lg-start">
+                            <a href="#" class="col-6 col-lg-6 col-sm-5">
+                                <img src="{{asset("front/images/app-store-white.svg")}}" class="box-shadow-medium-bottom border-radius-6px" alt="">
+                            </a>
+                            <a href="#" class="col-6 col-lg-6 col-sm-5">
+                                <img src="{{asset("front/images/play-store-white.svg")}}" class="box-shadow-medium-bottom border-radius-6px" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end section -->
     <!-- start subscription popup -->
     {{-- <div id="subscribe-popup" class="mfp-hide subscribe-popup">
             <div class="container">

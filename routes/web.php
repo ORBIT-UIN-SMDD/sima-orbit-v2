@@ -10,12 +10,13 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::prefix('news')->name('news.')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('index');
-    Route::get('/{slug}', [NewsController::class, 'detail'])->name('detail');
-
     Route::get('/category/{slug}', [NewsController::class, 'category'])->name('category');
-    Route::post('/comment', [NewsController::class, 'comment'])->name('comment');
+    Route::get('/{slug}', [NewsController::class, 'show'])->name('show');
+    Route::post('/{slug}', [NewsController::class, 'comment'])->name('comment');
+});
 
-    Route::get('/visit/alt', [NewsController::class, 'visit'])->name('visit')->middleware('TrustProxies');
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('/{id}', [App\Http\Controllers\Front\UserController::class, 'profile'])->name('profile');
 });
 
 
