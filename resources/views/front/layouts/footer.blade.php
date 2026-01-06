@@ -9,7 +9,7 @@
                         data-at2x="images/demo-it-business-logo-black@2x.png" alt="">
                 </a>
                 <p class="lh-28 w-90 xl-w-100 mx-lg-auto mx-xl-0">
-                    {{ Str::limit(strip_tags($setting_web->description), 150, '...') }}
+                    {{ Str::limit(strip_tags($setting_web->about), 150, '...') }}
                 </p>
                 <div class="elements-social social-icon-style-02 mt-15px">
                     <ul class="medium-icon dark">

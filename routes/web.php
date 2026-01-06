@@ -19,6 +19,11 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/{id}', [App\Http\Controllers\Front\UserController::class, 'profile'])->name('profile');
 });
 
+Route::prefix('profil')->name('profil.')->group(function () {
+    // Route::get('/', [MenuProfilController::class, 'index'])->name('index');
+    Route::get('/{slug}', [App\Http\Controllers\Front\MenuProfileController::class, 'show'])->name('show');
+});
+
 
 Route::post('/login', [App\Http\Controllers\Front\AuthController::class, 'login'])->name('login');
 Route::post('/logout', [App\Http\Controllers\Front\AuthController::class, 'logout'])->name('logout');

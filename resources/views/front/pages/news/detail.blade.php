@@ -1,7 +1,7 @@
 @extends('front.app')
 
 @section('seo')
-<title>{{ $meta['description'] }}</title>
+<title>{{ $meta['title'] }}</title>
     <meta name="description" content="{{ $meta['description'] }}">
     <meta name="keywords" content="{{ $meta['keywords'] }}">
     <meta name="author" content="UKM Orbit UIN Sjech M.Djamil Djambek Bukittinggi">

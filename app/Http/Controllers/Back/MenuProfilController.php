@@ -62,7 +62,7 @@ class MenuProfilController extends Controller
             'breadcrumbs' => [
                 [
                     'name' => 'Dashboard',
-                    'link' => route('back.dashboard')
+                    'link' => route('back.dashboard.index')
                 ],
                 [
                     'name' => 'Menu Profil',

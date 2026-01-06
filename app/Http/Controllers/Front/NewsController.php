@@ -23,7 +23,7 @@ class NewsController extends Controller
         $search = request()->input('q');
         $setting_web = SettingWebsite::first();
         $data = [
-            'title' => 'Berita | ' . $setting_web->name,
+            'title' => 'Berita',
             'meta' => [
                 'title' => 'Berita | ' . $setting_web->name,
                 'description' => strip_tags($setting_web->about),
@@ -50,6 +50,7 @@ class NewsController extends Controller
                     $query->where('title', 'like', '%' . $search . '%')
                         ->orWhere('content', 'like', '%' . $search . '%');
                 })->paginate(6),
+            'setting_web' => $setting_web,
         ];
         return view('front.pages.news.index', $data);
     }
@@ -61,7 +62,7 @@ class NewsController extends Controller
         $news = News::where('slug', $slug)->firstOrFail();
         $data = [
 
-            'title' => $news->title . " | Berita | " . $setting_web->name,
+            'title' => $news->title ,
             'meta' => [
                 'title' => $news->title . " | " . $setting_web->name,
                 'description' => $news->meta_description ? $news->meta_description : strip_tags(substr($news->content, 0, 160)),
@@ -83,6 +84,7 @@ class NewsController extends Controller
             'comments' => $news->comments()->where('status', 'approved')->get(),
             'next_news' => News::where('id', '>', $news->id)->first(),
             'prev_news' => News::where('id', '<', $news->id)->first(),
+            'setting_web' => $setting_web,
         ];
 
 
@@ -114,7 +116,7 @@ class NewsController extends Controller
     {
         $category = NewsCategory::where('slug', $slug)->firstOrFail();
         $data = [
-            'title' => 'Kategori Berita: ' . $category->name . ' | ' . SettingWebsite::first()->name,
+            'title' => 'Kategori Berita: ' . $category->name,
             'meta' => [
                 'title' => 'Kategori Berita: ' . $category->name . ' | ' . SettingWebsite::first()->name,
                 'description' => $category->description ? $category->description : 'Kategori Berita: ' . $category->name . ' di ' . SettingWebsite::first()->name,
@@ -144,41 +146,42 @@ class NewsController extends Controller
                 ->where('status', 'published')
                 ->where('news_category_id', $category->id)
                 ->paginate(6),
+                'setting_web' => SettingWebsite::first(),
         ];
         return view('front.pages.news.index', $data);
     }
 
     public function comment(Request $request, $slug)
     {
-        // if (Auth::check()) {
-        //     $validator = Validator::make($request->all(), [
-        //         'comment' => 'required',
-        //     ], [
-        //         'comment.required' => 'Komentar harus diisi',
-        //     ]);
+        if (Auth::check()) {
+            $validator = Validator::make($request->all(), [
+                'comment' => 'required',
+            ], [
+                'comment.required' => 'Komentar harus diisi',
+            ]);
 
-        //     if ($validator->fails()) {
-        //         Alert::error('Error', $validator->errors()->all());
-        //         return redirect()->back()->withInput()->withErrors($validator);
-        //     }
-        // } else {
+            if ($validator->fails()) {
+                Alert::error('Error', $validator->errors()->all());
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+        } else {
 
-        //     $validator = Validator::make($request->all(), [
-        //         'name' => 'required',
-        //         'email' => 'required|email',
-        //         'comment' => 'required',
-        //     ], [
-        //         'name.required' => 'Nama harus diisi',
-        //         'email.required' => 'Email harus diisi',
-        //         'email.email' => 'Email tidak valid',
-        //         'comment.required' => 'Komentar harus diisi',
-        //     ]);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email',
+                'comment' => 'required',
+            ], [
+                'name.required' => 'Nama harus diisi',
+                'email.required' => 'Email harus diisi',
+                'email.email' => 'Email tidak valid',
+                'comment.required' => 'Komentar harus diisi',
+            ]);
 
-        //     if ($validator->fails()) {
-        //         Alert::error('Error', $validator->errors()->all());
-        //         return redirect()->back()->withInput()->withErrors($validator);
-        //     }
-        // }
+            if ($validator->fails()) {
+                Alert::error('Error', $validator->errors()->all());
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',

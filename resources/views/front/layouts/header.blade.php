@@ -38,7 +38,7 @@
                                  role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                  @foreach ($menu_profiles as $menu_profile)
-                                     <li><a href="{{ route('news.category', $menu_profile->slug) }}"><i
+                                     <li><a href="{{ route('profil.show', $menu_profile->slug) }}"><i
                                                  class="bi bi-menu-button"></i>{{ $menu_profile->name }}</a></li>
                                  @endforeach
                              </ul>
@@ -56,7 +56,7 @@
                          </li>
                          <li class="nav-item"><a href="demo-it-business-case-studies.html" class="nav-link">Tentang Kami</a></li>
                           <li class="nav-item dropdown dropdown-with-icon-style02">
-                             <a href="" class="nav-link">Berita</a>
+                             <a href="{{ route("news.index") }}" class="nav-link">Berita</a>
                              <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink"
                                  role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
