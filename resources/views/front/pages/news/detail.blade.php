@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="w-75 sm-w-100 text-center text-md-start last-paragraph-no-margin">
                                     <p>
-                                        {{ \Illuminate\Support\Str::limit(strip_tags($news->user->about ?? '-'), 150) }}
+                                        {{ \Illuminate\Support\Str::limit(strip_tags($news->user->bio ?? '-'), 150) }}
                                     </p>
                                 </div>
                             </div>

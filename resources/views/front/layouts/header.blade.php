@@ -54,7 +54,7 @@
                                  @endforeach
                              </ul>
                          </li>
-                         <li class="nav-item"><a href="demo-it-business-case-studies.html" class="nav-link">Tentang Kami</a></li>
+                         <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">Tentang Kami</a></li>
                           <li class="nav-item dropdown dropdown-with-icon-style02">
                              <a href="{{ route("news.index") }}" class="nav-link">Berita</a>
                              <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink"
