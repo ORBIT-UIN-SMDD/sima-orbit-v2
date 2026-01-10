@@ -67,8 +67,15 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'date_of_birth' => 'date',
+            'is_active' => 'boolean',
             'password' => 'hashed',
         ];
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 
      public function getPhoto()

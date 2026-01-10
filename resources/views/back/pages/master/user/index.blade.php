@@ -88,13 +88,12 @@
                                             data-kt-check-target="#kt_table_users .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px"> Pengguna</th>
-                                <th class="min-w-125px">Jenis Kelamin</th>
-                                <th class="min-w-125px">phone</th>
-                                <th class="min-w-125px">Role</th>
-                                <th class="min-w-125px">Journal Permission</th>
-                                <th class="min-w-50px">Editor ID</th>
-                                <th class="min-w-50px">Reviewer ID</th>
+                                <th class="min-w-125px">Pengguna</th>
+                                <th class="min-w-100px">NIM</th>
+                                <th class="min-w-100px">Departemen</th>
+                                <th class="min-w-100px">Telepon</th>
+                                <th class="min-w-100px">Role</th>
+                                <th class="min-w-70px">Status</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
                         </thead>
@@ -122,10 +121,13 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="fw-bold"></span>{{ $user->gender ?? '-' }}
+                                        <span class="fw-bold">{{ $user->nim ?? '-' }}</span>
                                     </td>
                                     <td>
-                                        <span class="fw-bold"></span>{{ $user->phone ?? '-' }}
+                                        <span class="fw-bold">{{ $user->department->name ?? '-' }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold">{{ $user->phone ?? '-' }}</span>
                                     </td>
                                     <td>
                                         @foreach ($user->getRoleNames() ?? [] as $role)
@@ -136,20 +138,13 @@
                                             @endif
                                         @endforeach
                                     </td>
-
                                     <td>
-                                        @foreach ($user->getPermissionNames() ?? [] as $permission)
-                                                <span class="badge badge-light-success">{{ $permission }}</span>
-
-                                        @endforeach
+                                        @if ($user->is_active)
+                                            <span class="badge badge-light-success">Aktif</span>
+                                        @else
+                                            <span class="badge badge-light-danger">Tidak Aktif</span>
+                                        @endif
                                     </td>
-                                    <td>
-                                        <span class="fw-bold"></span>{{ $user->editor_id ?? '-' }}
-                                    </td>
-                                    <td>
-                                        <span class="fw-bold"></span>{{ $user->reviewer_id ?? '-' }}
-                                    </td>
-
                                     <td class="text-end">
                                         <a href="#"
                                             class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
