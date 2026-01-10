@@ -73,7 +73,7 @@
                              </ul>
                          </li>
                          <li class="nav-item"><a href="#" class="nav-link">Alumni</a></li>
-                         <li class="nav-item"><a href="demo-it-business-contact.html" class="nav-link">Kontak Kami</a></li>
+                         <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Kontak Kami</a></li>
                      </ul>
                  </div>
              </div>

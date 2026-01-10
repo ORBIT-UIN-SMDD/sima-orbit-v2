@@ -8,6 +8,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/about', [App\Http\Controllers\Front\AboutController::class, 'index'])->name('about');
 
+Route::get('/contact', [App\Http\Controllers\Front\ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [App\Http\Controllers\Front\ContactController::class, 'store'])->name('contact.store');
+
 Route::prefix('news')->name('news.')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('index');
     Route::get('/category/{slug}', [NewsController::class, 'category'])->name('category');

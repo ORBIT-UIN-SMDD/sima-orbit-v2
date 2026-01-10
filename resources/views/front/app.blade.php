@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}" />
     <link rel="stylesheet" href="{{ asset('front/css/custom.css') }}" />
-    @stack('styles')
+    @yield('styles')
 </head>
 
 <body data-mobile-nav-style="full-screen-menu" data-mobile-nav-bg-color="#252840">
@@ -42,7 +42,7 @@
     <script type="text/javascript" src="{{ asset('front/js/vendors.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('front/js/main.js') }}"></script>
     @include('sweetalert::alert')
-    @stack('scripts')
+    @yield('scripts')
 </body>
 
 </html>
