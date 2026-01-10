@@ -70,7 +70,11 @@ Route::prefix('back')->name('back.')->group(function () {
 
     Route::prefix('about-us')->name('about-us.')->group(function () {
         Route::get('/', [App\Http\Controllers\Back\AboutUsController::class, 'index'])->name('index');
-        Route::post('/update', [App\Http\Controllers\Back\AboutUsController::class, 'update'])->name('update');
+        Route::get('/create', [App\Http\Controllers\Back\AboutUsController::class, 'create'])->name('create');
+        Route::post('/create', [App\Http\Controllers\Back\AboutUsController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [App\Http\Controllers\Back\AboutUsController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [App\Http\Controllers\Back\AboutUsController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [App\Http\Controllers\Back\AboutUsController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('menu')->name('menu.')->group(function () {

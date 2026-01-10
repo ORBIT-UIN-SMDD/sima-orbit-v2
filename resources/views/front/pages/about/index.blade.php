@@ -113,11 +113,13 @@
                         data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)">
                         <img src="{{ $about_other[0]->getImage() ?? '' }}" alt="" class="border-radius-5px">
                     </div>
+                    @if ($about_other->count() > 1)
                     <div class="w-60 md-w-50 xs-w-55 overflow-hidden position-absolute left-15px bottom-minus-50px"
                         data-shadow-animation="true" data-animation-delay="200"
                         data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
                         <img src="{{ $about_other[1]->getImage() ?? '' }}" alt="" class="border-radius-5px" />
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
