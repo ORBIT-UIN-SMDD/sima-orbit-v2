@@ -188,7 +188,7 @@
 
             // Popup content
             var popupContent = '<div style="text-align: center; min-width: 200px;">' +
-                '<strong style="font-size: 16px; color: #333; display: block; margin-bottom: 8px;">Crafto Design</strong>' +
+                '<strong style="font-size: 16px; color: #333; display: block; margin-bottom: 8px;">Sekretariat ' + @json($setting_web->name) + '</strong>' +
                 '<p style="margin: 0 0 10px 0; color: #666; font-size: 14px;">' + @json($setting_web->address) +
                 '</p>' +
                 '<a href="https://maps.google.com/maps?ll=' + lat + ',' + lng + '&z=17&t=m" ' +
