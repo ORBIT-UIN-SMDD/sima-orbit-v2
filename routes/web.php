@@ -68,6 +68,20 @@ Route::prefix('back')->name('back.')->group(function () {
         Route::post('/comment/spam/{id}', [App\Http\Controllers\Back\NewsController::class, 'commentSpam'])->name('comment.spam');
     });
 
+    Route::prefix('member-field-blog')->name('member-field-blog.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'create'])->name('create');
+        Route::post('/create', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'destroy'])->name('destroy');
+
+        Route::get('/comment', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'comment'])->name('comment');
+        Route::post('/comment/spam/{id}', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'commentSpam'])->name('comment.spam');
+        Route::post('/comment/approve/{id}', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'commentApprove'])->name('comment.approve');
+        Route::delete('/comment/delete/{id}', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'commentDestroy'])->name('comment.destroy');
+    });
+
     Route::prefix('about-us')->name('about-us.')->group(function () {
         Route::get('/', [App\Http\Controllers\Back\AboutUsController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Back\AboutUsController::class, 'create'])->name('create');
