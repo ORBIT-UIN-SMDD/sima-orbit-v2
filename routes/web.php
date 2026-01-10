@@ -135,6 +135,19 @@ Route::prefix('back')->name('back.')->group(function () {
             Route::put('/edit/{id}', [App\Http\Controllers\Back\Master\DepartmentController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [App\Http\Controllers\Back\Master\DepartmentController::class, 'destroy'])->name('destroy');
         });
+
+        Route::prefix('period')->name('period.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Back\Master\PeriodController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Back\Master\PeriodController::class, 'create'])->name('create');
+            Route::post('/create', [App\Http\Controllers\Back\Master\PeriodController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [App\Http\Controllers\Back\Master\PeriodController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [App\Http\Controllers\Back\Master\PeriodController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [App\Http\Controllers\Back\Master\PeriodController::class, 'destroy'])->name('destroy');
+            Route::get('/{id}', [App\Http\Controllers\Back\Master\PeriodController::class, 'show'])->name('show');
+            Route::post('/{id}/add-user', [App\Http\Controllers\Back\Master\PeriodController::class, 'addUser'])->name('add-user');
+            Route::put('/{id}/update-user/{periodUserId}', [App\Http\Controllers\Back\Master\PeriodController::class, 'updateUser'])->name('update-user');
+            Route::delete('/{id}/remove-user/{periodUserId}', [App\Http\Controllers\Back\Master\PeriodController::class, 'removeUser'])->name('remove-user');
+        });
     });
 
     Route::prefix('setting')->name('setting.')->group(function () {

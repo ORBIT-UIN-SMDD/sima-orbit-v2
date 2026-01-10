@@ -24,4 +24,14 @@ class PeriodUser extends Model
     {
         return $this->belongsTo(Period::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function memberField()
+    {
+        return $this->belongsTo(MemberField::class);
+    }
 }
