@@ -112,13 +112,30 @@
                                 <option></option>
                                 @foreach ($memberFields as $field)
                                     <option value="{{ $field->id }}"
-                                        {{ old('member_field_id') == $field->id ? 'selected' : '' }}>
+                                        {{ old('member_field_id', $selected_member_field_id ?? '') == $field->id ? 'selected' : '' }}>
                                         {{ $field->name }}</option>
                                 @endforeach
                             </select>
                             @error('member_field_id')
                                 <div class="text-danger fs-7">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        <div class="mb-10 fv-row">
+                            <label class="form-label">Periode</label>
+                            <select name="period_id" class="form-select mb-2" data-control="select2"
+                                data-hide-search="true" data-placeholder="Pilih Periode">
+                                <option value="">-- Pilih Periode --</option>
+                                @foreach ($periods as $period)
+                                    <option value="{{ $period->id }}"
+                                        {{ old('period_id', $selected_period_id ?? '') == $period->id ? 'selected' : '' }}>
+                                        {{ $period->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('period_id')
+                                <div class="text-danger fs-7">{{ $message }}</div>
+                            @enderror
+                            <div class="text-muted fs-7">Pilih periode kepengurusan untuk blog ini (opsional)</div>
                         </div>
 
                         <div class="mb-10">

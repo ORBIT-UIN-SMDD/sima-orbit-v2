@@ -16,6 +16,24 @@
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                     <div class="w-100 mw-150px">
                         <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                            data-placeholder="Periode" id="filter_period">
+                            <option value="">Semua Periode</option>
+                            @foreach ($periods as $period)
+                                <option value="{{ $period->id }}" {{ $filter_period_id == $period->id ? 'selected' : '' }}>{{ $period->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="w-100 mw-150px">
+                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                            data-placeholder="Bidang" id="filter_member_field">
+                            <option value="">Semua Bidang</option>
+                            @foreach ($memberFields as $field)
+                                <option value="{{ $field->id }}" {{ $filter_member_field_id == $field->id ? 'selected' : '' }}>{{ $field->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="w-100 mw-150px">
+                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                             data-placeholder="Status" data-kt-ecommerce-product-filter="status">
                             <option></option>
                             <option value="all">Semua</option>
@@ -24,7 +42,7 @@
                             <option value="archived">Archived</option>
                         </select>
                     </div>
-                    <a href="{{ route('back.member-field-blog.create') }}" class="btn btn-primary">
+                    <a href="{{ route('back.member-field-blog.create', ['period_id' => $filter_period_id, 'member_field_id' => $filter_member_field_id]) }}" class="btn btn-primary">
                         <i class="ki-duotone ki-plus fs-2"></i>Tambah Blog</a>
                 </div>
             </div>
@@ -40,6 +58,7 @@
                                 </div>
                             </th>
                             <th class="min-w-200px">Blog</th>
+                            <th class="text-end min-w-100px">Periode</th>
                             <th class="text-end min-w-100px">Bidang</th>
                             <th class="text-end min-w-150px">Dibuat Oleh</th>
                             <th class="text-end min-w-100px">Status</th>
@@ -67,6 +86,9 @@
                                                 {{ Str::limit(strip_tags($blog->content), 100) }}...</div>
                                         </div>
                                     </div>
+                                </td>
+                                <td class="text-end pe-0">
+                                    <span class="badge badge-light-info">{{ $blog->period->name ?? '-' }}</span>
                                 </td>
                                 <td class="text-end pe-0">
                                     <span class="fw-bold">{{ $blog->memberField->name ?? '-' }}</span>
@@ -145,6 +167,35 @@
 @section('scripts')
     <script>
         "use strict";
+
+        // Filter by period and member field
+        document.getElementById('filter_period').addEventListener('change', function() {
+            applyFilters();
+        });
+
+        document.getElementById('filter_member_field').addEventListener('change', function() {
+            applyFilters();
+        });
+
+        function applyFilters() {
+            var periodId = document.getElementById('filter_period').value;
+            var memberFieldId = document.getElementById('filter_member_field').value;
+            var url = '{{ route("back.member-field-blog.index") }}';
+            var params = [];
+
+            if (periodId) {
+                params.push('period_id=' + periodId);
+            }
+            if (memberFieldId) {
+                params.push('member_field_id=' + memberFieldId);
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            window.location.href = url;
+        }
 
         var KTAppEcommerceBlog = function() {
             var table;

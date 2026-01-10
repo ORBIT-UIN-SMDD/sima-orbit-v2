@@ -36,6 +36,11 @@ class MemberFieldBlog extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function period()
+    {
+        return $this->belongsTo(Period::class, 'period_id');
+    }
+
     public function viewers()
     {
         return $this->hasMany(MemberFieldBlogViewer::class, 'member_field_blog_id');

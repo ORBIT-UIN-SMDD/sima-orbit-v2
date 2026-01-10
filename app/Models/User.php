@@ -90,4 +90,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(News::class, 'user_id');
     }
+
+    public function blogs()
+    {
+        return $this->hasMany(MemberFieldBlog::class, 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(MemberFieldBlogComment::class, 'user_id');
+    }
+
+    public function periodUsers()
+    {
+        return $this->hasMany(PeriodUser::class, 'user_id');
+    }
 }

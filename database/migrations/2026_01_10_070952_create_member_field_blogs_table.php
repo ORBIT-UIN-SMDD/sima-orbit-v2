@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('member_field_id')->constrained('member_fields')->onDelete('cascade');
+            $table->foreignId('period_id')->nullable()->constrained('periods')->onDelete('set null');
             $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();

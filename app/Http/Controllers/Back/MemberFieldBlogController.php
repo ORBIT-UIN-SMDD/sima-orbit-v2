@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MemberField;
 use App\Models\MemberFieldBlog;
 use App\Models\MemberFieldBlogComment;
+use App\Models\Period;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +14,20 @@ use Illuminate\Support\Str;
 
 class MemberFieldBlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = MemberFieldBlog::with(['memberField', 'user', 'period'])->latest();
+
+        // Filter berdasarkan period_id jika ada
+        if ($request->has('period_id') && $request->period_id) {
+            $query->where('period_id', $request->period_id);
+        }
+
+        // Filter berdasarkan member_field_id jika ada
+        if ($request->has('member_field_id') && $request->member_field_id) {
+            $query->where('member_field_id', $request->member_field_id);
+        }
+
         $data = [
             'title' => 'Blog Bidang',
             'breadcrumbs' => [
@@ -27,13 +40,17 @@ class MemberFieldBlogController extends Controller
                     'link' => route('back.member-field-blog.index')
                 ]
             ],
-            'blogs' => MemberFieldBlog::with(['memberField', 'user'])->latest()->get()
+            'blogs' => $query->get(),
+            'periods' => Period::orderBy('name', 'desc')->get(),
+            'memberFields' => MemberField::all(),
+            'filter_period_id' => $request->period_id,
+            'filter_member_field_id' => $request->member_field_id
         ];
 
         return view('back.pages.member_field_blog.index', $data);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $data = [
             'title' => 'Tambah Blog Bidang',
@@ -51,7 +68,10 @@ class MemberFieldBlogController extends Controller
                     'link' => route('back.member-field-blog.create')
                 ]
             ],
-            'memberFields' => MemberField::all()
+            'memberFields' => MemberField::all(),
+            'periods' => Period::orderBy('name', 'desc')->get(),
+            'selected_period_id' => $request->period_id,
+            'selected_member_field_id' => $request->member_field_id
         ];
 
         return view('back.pages.member_field_blog.create', $data);
@@ -66,6 +86,7 @@ class MemberFieldBlogController extends Controller
                 'title' => 'required|string|max:255',
                 'content' => 'required',
                 'member_field_id' => 'required|exists:member_fields,id',
+                'period_id' => 'nullable|exists:periods,id',
                 'status' => 'required|in:draft,published,archived',
                 'meta_keywords' => 'nullable',
             ],
@@ -96,6 +117,7 @@ class MemberFieldBlogController extends Controller
         $blog->slug = $slug;
         $blog->content = $request->content;
         $blog->member_field_id = $request->member_field_id;
+        $blog->period_id = $request->period_id;
         $blog->user_id = Auth::user()->id;
         $blog->status = $request->status;
         $blog->meta_title = $request->title;
@@ -137,7 +159,8 @@ class MemberFieldBlogController extends Controller
                 ]
             ],
             'blog' => $blog,
-            'memberFields' => MemberField::all()
+            'memberFields' => MemberField::all(),
+            'periods' => Period::orderBy('name', 'desc')->get()
         ];
 
         return view('back.pages.member_field_blog.edit', $data);
@@ -152,6 +175,7 @@ class MemberFieldBlogController extends Controller
                 'title' => 'required|string|max:255',
                 'content' => 'required',
                 'member_field_id' => 'required|exists:member_fields,id',
+                'period_id' => 'nullable|exists:periods,id',
                 'status' => 'required|in:draft,published,archived',
                 'meta_keywords' => 'nullable',
             ],
@@ -183,6 +207,7 @@ class MemberFieldBlogController extends Controller
         $blog->slug = $slug;
         $blog->content = $request->content;
         $blog->member_field_id = $request->member_field_id;
+        $blog->period_id = $request->period_id;
         $blog->user_id = Auth::user()->id;
         $blog->status = $request->status;
         $blog->meta_title = $request->title;

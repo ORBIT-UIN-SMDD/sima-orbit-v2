@@ -142,7 +142,9 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion">
                     <div class="menu-item">
-                        <a class="menu-link @if (request()->routeIs('back.member-field-blog.index') || request()->routeIs('back.member-field-blog.create') || request()->routeIs('back.member-field-blog.edit')) active @endif"
+                        <a class="menu-link @if (request()->routeIs('back.member-field-blog.index') ||
+                                request()->routeIs('back.member-field-blog.create') ||
+                                request()->routeIs('back.member-field-blog.edit')) active @endif"
                             href="{{ route('back.member-field-blog.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
@@ -184,6 +186,130 @@
         @endrole
 
 
+        <div class="menu-item pt-5">
+            <div class="menu-content"><span class="menu-heading fw-bold text-uppercase fs-7">Kepengurusan</span>
+            </div>
+        </div>
+
+        @php
+            $period_users = \App\Models\PeriodUser::where('user_id', auth()->id())
+                ->with(['period', 'memberField'])
+                ->orderBy('created_at', 'desc')
+                ->get();
+        @endphp
+
+        @forelse ($period_users as $pu)
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-calendar fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </span>
+                    <span class="menu-title">{{ $pu->period->name ?? '-' }}</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion">
+
+                    <div class="menu-item">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title text-muted">
+                                Penugasan
+                            </span>
+                        </span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title text-muted">
+                                Asset
+                            </span>
+                        </span>
+                    </div>
+                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Persuratan</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="#">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Surat Masuk</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="#">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Surat Keluar</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {{-- Blog Bidang untuk periode ini --}}
+                    @if ($pu->memberField)
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Blog Bidang</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="{{ route('back.member-field-blog.index', ['period_id' => $pu->period_id, 'member_field_id' => $pu->member_field_id]) }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">List Blog</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="{{ route('back.member-field-blog.create', ['period_id' => $pu->period_id, 'member_field_id' => $pu->member_field_id]) }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Tambah Blog</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @empty
+            <div class="menu-item">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-information fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                        </i>
+                    </span>
+                    <span class="menu-title text-muted">Belum ada periode</span>
+                </span>
+            </div>
+        @endforelse
 
 
         @role('super-admin')
