@@ -212,16 +212,35 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion">
 
-                    <div class="menu-item">
-                        <span class="menu-link">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
+                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if (request()->routeIs('back.appointment.*') && request('period_id') == $pu->period_id) here show @endif">
+                            <span class="menu-link">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Penugasan</span>
+                                <span class="menu-arrow"></span>
                             </span>
-                            <span class="menu-title text-muted">
-                                Penugasan
-                            </span>
-                        </span>
-                    </div>
+                            <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-item">
+                                    <a class="menu-link @if (request()->routeIs('back.appointment.index') && request('period_id') == $pu->period_id) active @endif"
+                                        href="{{ route('back.appointment.index', ['period_id' => $pu->period_id]) }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Penugasan Saya</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link @if (request()->routeIs('back.appointment.manage') && request('period_id') == $pu->period_id) active @endif"
+                                        href="{{ route('back.appointment.manage', ['period_id' => $pu->period_id]) }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Manajemen Penugasan</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     <div class="menu-item">
                         <span class="menu-link">
                             <span class="menu-bullet">

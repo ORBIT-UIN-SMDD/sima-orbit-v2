@@ -22,4 +22,9 @@ class AppointmentUser extends Model
     {
         return $this->belongsTo(Appointment::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

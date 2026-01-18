@@ -82,6 +82,20 @@ Route::prefix('back')->name('back.')->group(function () {
         Route::delete('/comment/delete/{id}', [App\Http\Controllers\Back\MemberFieldBlogController::class, 'commentDestroy'])->name('comment.destroy');
     });
 
+    Route::prefix('appointment')->name('appointment.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Back\AppointmentController::class, 'index'])->name('index');
+        Route::get('/manage', [App\Http\Controllers\Back\AppointmentController::class, 'manage'])->name('manage');
+        Route::get('/create', [App\Http\Controllers\Back\AppointmentController::class, 'create'])->name('create');
+        Route::post('/create', [App\Http\Controllers\Back\AppointmentController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [App\Http\Controllers\Back\AppointmentController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [App\Http\Controllers\Back\AppointmentController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [App\Http\Controllers\Back\AppointmentController::class, 'destroy'])->name('destroy');
+        Route::get('/{id}', [App\Http\Controllers\Back\AppointmentController::class, 'show'])->name('show');
+        Route::post('/{id}/add-user', [App\Http\Controllers\Back\AppointmentController::class, 'addUser'])->name('add-user');
+        Route::put('/{id}/update-user/{appointmentUserId}', [App\Http\Controllers\Back\AppointmentController::class, 'updateUser'])->name('update-user');
+        Route::delete('/{id}/remove-user/{appointmentUserId}', [App\Http\Controllers\Back\AppointmentController::class, 'removeUser'])->name('remove-user');
+    });
+
     Route::prefix('about-us')->name('about-us.')->group(function () {
         Route::get('/', [App\Http\Controllers\Back\AboutUsController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Back\AboutUsController::class, 'create'])->name('create');
