@@ -21,6 +21,11 @@ class MemberField extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function blogs()
+    {
+        return $this->hasMany(MemberFieldBlog::class, 'member_field_id');
+    }
+
      public function getImage()
     {
 

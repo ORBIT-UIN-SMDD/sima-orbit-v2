@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\MemberFieldBlogController;
 use App\Http\Controllers\Front\NewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,13 @@ Route::get('/about', [App\Http\Controllers\Front\AboutController::class, 'index'
 
 Route::get('/contact', [App\Http\Controllers\Front\ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [App\Http\Controllers\Front\ContactController::class, 'store'])->name('contact.store');
+
+Route::prefix('member-field')->name('memberfield.')->group(function () {
+    Route::get('/', [MemberFieldBlogController::class, 'index'])->name('index');
+    Route::get('/division/{slug}', [MemberFieldBlogController::class, 'division'])->name('division');
+    Route::get('/{slug}', [MemberFieldBlogController::class, 'show'])->name('show');
+    Route::post('/{slug}', [MemberFieldBlogController::class, 'comment'])->name('comment');
+});
 
 Route::prefix('news')->name('news.')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('index');

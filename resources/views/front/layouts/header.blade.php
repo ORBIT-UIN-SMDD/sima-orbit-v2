@@ -46,12 +46,12 @@
                              </ul>
                          </li>
                          <li class="nav-item dropdown dropdown-with-icon-style02">
-                             <a href="#" class="nav-link">Bidang</a>
+                             <a href="{{ route("memberfield.index") }}" class="nav-link">Bidang</a>
                              <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink"
                                  role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                  @foreach ($member_fields as $member_field)
-                                     <li><a href="{{ route('news.category', $member_field->slug) }}"><i
+                                     <li><a href="{{ route('memberfield.division', $member_field->slug) }}"><i
                                                  class="bi bi-gem"></i>{{ $member_field->name }}</a></li>
                                  @endforeach
                              </ul>

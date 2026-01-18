@@ -275,30 +275,30 @@
                         <div class="swiper magic-cursor slider-one-slide"
                             data-slider-options='{ "slidesPerView": 1, "spaceBetween": 30, "loop": true, "navigation": { "nextEl": ".slider-one-slide-next-1", "prevEl": ".slider-one-slide-prev-1" }, "autoplay": { "delay": 4000, "disableOnInteraction": false }, "keyboard": { "enabled": true, "onlyInViewport": true }, "breakpoints": { "1200": { "slidesPerView": 4 }, "992": { "slidesPerView": 3 }, "768": { "slidesPerView": 2 }, "320": { "slidesPerView": 1 } }, "effect": "slide" }'>
                             <div class="swiper-wrapper">
+                                @foreach ($list_member_field_blog as $blog_bidang)
                                 <!-- start slider item -->
                                 <div class="swiper-slide">
                                     <!-- start services box style -->
                                     <div
                                         class="services-box-style-03 last-paragraph-no-margin border-radius-6px overflow-hidden">
                                         <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">analytics</a>
+                                            <a href="{{ route('memberfield.show', $blog_bidang->slug) }}"><img
+                                                    src="{{ $blog_bidang->getThumbnail() }}" alt="{{ $blog_bidang->title }}" style="width: 100%; height: 220px; object-fit: cover;"></a>
+                                            <a href="{{ route('memberfield.division', $blog_bidang->memberField->slug) }}"
+                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">{{ $blog_bidang->memberField->name }}</a>
                                         </div>
                                         <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Data and
-                                                    analytics</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
+                                            <div class="ps-35px pe-35px pt-30px pb-30px text-center">
+                                                <a href="{{ route('memberfield.show', $blog_bidang->slug) }}"
+                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">{{ Str::limit($blog_bidang->title, 40) }}</a>
+                                                <p>{{ Str::limit(strip_tags($blog_bidang->content), 60) }}</p>
                                             </div>
                                             <div
                                                 class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
+                                                <a href="{{ route('memberfield.show', $blog_bidang->slug) }}"
                                                     class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
                                                     <span>
-                                                        <span class="btn-text">Explore services</span>
+                                                        <span class="btn-text">Baca Selengkapnya</span>
                                                         <span class="btn-icon"><i
                                                                 class="fa-solid fa-arrow-right"></i></span>
                                                         <span class="btn-icon"><i
@@ -311,258 +311,7 @@
                                     <!-- end services box style -->
                                 </div>
                                 <!-- end slider item -->
-                                <!-- start slider item -->
-                                <div class="swiper-slide">
-                                    <!-- start services box style -->
-                                    <div
-                                        class="services-box-style-03 last-paragraph-no-margin border-radius-6px overflow-hidden">
-                                        <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">Finance</a>
-                                        </div>
-                                        <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Finance
-                                                    consulting</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
-                                                    <span>
-                                                        <span class="btn-text">Explore services</span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end services box style -->
-                                </div>
-                                <!-- end slider item -->
-                                <!-- start slider item -->
-                                <div class="swiper-slide">
-                                    <!-- start services box style -->
-                                    <div
-                                        class="services-box-style-03 last-paragraph-no-margin border-radius-6px overflow-hidden">
-                                        <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">analytics</a>
-                                        </div>
-                                        <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Tech
-                                                    innovation</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
-                                                    <span>
-                                                        <span class="btn-text">Explore services</span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end services box style -->
-                                </div>
-                                <!-- end slider item -->
-                                <!-- start slider item -->
-                                <div class="swiper-slide">
-                                    <!-- start services box style -->
-                                    <div
-                                        class="services-box-style-03 last-paragraph-no-margin border-radius-6px overflow-hidden">
-                                        <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">Digital</a>
-                                        </div>
-                                        <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Digital
-                                                    commerce</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
-                                                    <span>
-                                                        <span class="btn-text">Explore services</span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end services box style -->
-                                </div>
-                                <!-- end slider item -->
-                                <!-- start slider item -->
-                                <div class="swiper-slide">
-                                    <!-- start services box style -->
-                                    <div
-                                        class="services-box-style-03 last-paragraph-no-margin border-radius-4px overflow-hidden">
-                                        <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">Digital</a>
-                                        </div>
-                                        <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Cloud
-                                                    computing</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
-                                                    <span>
-                                                        <span class="btn-text">Explore services</span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end services box style -->
-                                </div>
-                                <!-- end slider item -->
-                                <!-- start slider item -->
-                                <div class="swiper-slide">
-                                    <!-- start services box style -->
-                                    <div
-                                        class="services-box-style-03 last-paragraph-no-margin border-radius-6px overflow-hidden">
-                                        <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">analytics</a>
-                                        </div>
-                                        <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Data and
-                                                    analytics</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
-                                                    <span>
-                                                        <span class="btn-text">Explore services</span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end services box style -->
-                                </div>
-                                <!-- end slider item -->
-                                <!-- start slider item -->
-                                <div class="swiper-slide">
-                                    <!-- start services box style -->
-                                    <div
-                                        class="services-box-style-03 last-paragraph-no-margin border-radius-6px overflow-hidden">
-                                        <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">Finance</a>
-                                        </div>
-                                        <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Finance
-                                                    consulting</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
-                                                    <span>
-                                                        <span class="btn-text">Explore services</span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end services box style -->
-                                </div>
-                                <!-- end slider item -->
-                                <!-- start slider item -->
-                                <div class="swiper-slide">
-                                    <!-- start services box style -->
-                                    <div
-                                        class="services-box-style-03 last-paragraph-no-margin border-radius-6px overflow-hidden">
-                                        <div class="position-relative">
-                                            <a href="demo-it-business-services-details.html"><img
-                                                    src="https://placehold.co/600x440" alt=""></a>
-                                            <a href="#"
-                                                class="btn btn-very-small btn-rounded btn-dark-gray text-white btn-box-shadow ps-15px pe-15px pt-5px pb-5px lh-16 position-absolute right-30px top-30px text-uppercase">analytics</a>
-                                        </div>
-                                        <div class="bg-white">
-                                            <div class="ps-65px pe-65px pt-30px pb-30px text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="d-inline-block fs-18 fw-700 text-dark-gray mb-5px">Tech
-                                                    innovation</a>
-                                                <p>Lorem ipsum simply dummy text of amet consectetur.</p>
-                                            </div>
-                                            <div
-                                                class="d-flex justify-content-center border-top border-color-extra-medium-gray pt-20px pb-20px ps-50px pe-50px position-relative text-center">
-                                                <a href="demo-it-business-services-details.html"
-                                                    class="btn btn-link btn-hover-animation-switch btn-medium fw-700 text-dark-gray text-uppercase">
-                                                    <span>
-                                                        <span class="btn-text">Explore services</span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i
-                                                                class="fa-solid fa-arrow-right"></i></span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end services box style -->
-                                </div>
-                                <!-- end slider item -->
+                                @endforeach
                             </div>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ use App\Models\AboutUs;
 use App\Models\Announcement;
 use App\Models\Event;
 use App\Models\MemberField;
+use App\Models\MemberFieldBlog;
 use App\Models\News;
 use App\Models\SettingWebsite;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class HomeController extends Controller
                 'favicon' => $setting_web->favicon
             ],
             'list_member_field' => MemberField::all(),
+            'list_member_field_blog' => MemberFieldBlog::with(['memberField', 'user', 'viewers'])->where('status', 'published')->latest()->limit(10)->get(),
             'list_news' => News::latest()->where('status', 'published')->limit(10)->get(),
             'about_us' => AboutUs::all(),
             'list_announcement' => Announcement::latest()->where('is_active', true)->limit(8)->get(),
