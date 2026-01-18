@@ -27,6 +27,9 @@ Route::prefix('profil')->name('profil.')->group(function () {
     Route::get('/{slug}', [App\Http\Controllers\Front\MenuProfileController::class, 'show'])->name('show');
 });
 
+Route::get('member', [App\Http\Controllers\Front\MenuProfileController::class, 'member'])->name('member');
+Route::post('member/ajax', [App\Http\Controllers\Front\MenuProfileController::class, 'memberAjax'])->name('member.ajax');
+
 
 Route::post('/login', [App\Http\Controllers\Front\AuthController::class, 'login'])->name('login');
 Route::post('/logout', [App\Http\Controllers\Front\AuthController::class, 'logout'])->name('logout');

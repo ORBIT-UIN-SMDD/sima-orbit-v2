@@ -25,7 +25,7 @@
     <!-- End of breadcrumb section -->
 
     <!-- start section -->
-    @
+
     <section id="down-section" class="background-position-center-top sm-background-image-none"
         style="background-image: url('{{ asset('front/images/vertical-line-bg.svg') }}')">
         <div class="container">
@@ -126,6 +126,8 @@
     </section>
     @endif
 
+    @include('front.partials.sima-orbit-banner')
+
     <!-- start section -->
     {{-- <section class="background-position-center-top pt-0 sm-background-image-none" style="background-image: url('images/vertical-line-bg.svg')">
             <div class="container">
@@ -220,6 +222,7 @@
             </div>
         </section> --}}
     <!-- end section -->
+
 @endsection
 
 @section('scripts')

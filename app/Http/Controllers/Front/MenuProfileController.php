@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\MenuProfile;
+use App\Models\Period;
 use App\Models\SettingWebsite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -19,7 +20,7 @@ class MenuProfileController extends Controller
             'meta' => [
                 'title' => $menu_profil->name . ' | ' . $setting_web->name,
                 'description' => Str::limit(strip_tags($menu_profil->content), 160),
-                'keywords' => $setting_web->name . ', ' . $menu_profil->name .', ORBIT, SIMA ORBIT, UIN Sjech M. Djamil Djambek Bukittinggi, UIN Bukittinggi, UKM ORBIT, ORBIT UIN Bukittinggi, Unit Kegiatan Mahasiswa, profile',
+                'keywords' => $setting_web->name . ', ' . $menu_profil->name . ', ORBIT, SIMA ORBIT, UIN Sjech M. Djamil Djambek Bukittinggi, UIN Bukittinggi, UKM ORBIT, ORBIT UIN Bukittinggi, Unit Kegiatan Mahasiswa, profile',
                 'favicon' => $menu_profil->image ?? $setting_web->favicon
             ],
             'breadcrumbs' => [
@@ -41,5 +42,44 @@ class MenuProfileController extends Controller
         ];
 
         return view('front.pages.menu_profile.show', $data);
+    }
+
+    public function member()
+    {
+        $setting_web = SettingWebsite::first();
+        $data = [
+            'title' => 'Pengurus & Anggota',
+            'meta' => [
+                'title' => 'Pengurus & Anggota | ' . $setting_web->name,
+                'description' => strip_tags($setting_web->about),
+                'keywords' => $setting_web->name . ', Pengurus, ORBIT, SIMA ORBIT, UIN Sjech M. Djamil Djambek Bukittinggi, UIN Bukittinggi, UKM ORBIT, ORBIT UIN Bukittinggi, Unit Kegiatan Mahasiswa',
+                'favicon' => $setting_web->favicon
+            ],
+            'breadcrumbs' => [
+                [
+                    'name' => 'Home',
+                    'link' => route('home')
+                ],
+                [
+                    'name' => 'Pengurus & Anggota',
+                    'link' => route('member')
+                ]
+            ],
+            'setting_web' => $setting_web,
+            'period' => Period::orderBy('id', 'desc')->get(),
+        ];
+        return view('front.pages.menu_profile.member', $data);
+    }
+    public function memberAjax(Request $request)
+    {
+        $periodsId = $request->input('periods_id');
+        if ($periodsId) {
+            $periods = Period::with(['periodUsers' => function ($query) use ($periodsId) {
+                $query->whereIn('period_id', $periodsId);
+            }, 'periodUsers.user', 'periodUsers.memberField'])->whereIn('id', $periodsId)->get();
+            return response()->json($periods);
+        } else {
+            return response()->json(['message' => 'No periods_id provided'], 400);
+        }
     }
 }

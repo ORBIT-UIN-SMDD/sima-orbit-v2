@@ -6,6 +6,7 @@ use App\Models\AboutUs;
 use App\Models\MemberField;
 use App\Models\News;
 use App\Models\NewsCategory;
+use App\Models\Period;
 use App\Models\SettingBanner;
 use App\Models\SettingWebsite;
 use App\Models\User;
@@ -122,5 +123,38 @@ class DatabaseSeeder extends Seeder
             'slug' => 'robotics',
             'description' => 'Bidang yang mempelajari dan mengembangkan teknologi robotika.',
         ]);
+
+        Period::create([
+            'name' => 'Periode 2023',
+            'slug' => 'periode-2023',
+            'start_date' => '2023-01-01',
+            'end_date' => '2023-12-31',
+            'description' => 'Periode kepengurusan ORBIT UIN Bukittinggi tahun 2023.',
+        ]);
+
+        Period::create([
+            'name' => 'Periode 2024',
+            'slug' => 'periode-2024',
+            'start_date' => '2024-01-01',
+            'end_date' => '2024-12-31',
+            'description' => 'Periode kepengurusan ORBIT UIN Bukittinggi tahun 2024.',
+        ]);
+
+        Period::create([
+            'name' => 'Periode 2025',
+            'slug' => 'periode-2025',
+            'start_date' => '2025-01-01',
+            'end_date' => '2025-12-31',
+            'description' => 'Periode kepengurusan ORBIT UIN Bukittinggi tahun 2025.',
+        ]);
+
+        Period::create([
+            'name' => 'Periode 2026',
+            'slug' => 'periode-2026',
+            'start_date' => '2026-01-01',
+            'end_date' => '2026-12-31',
+            'description' => 'Periode kepengurusan ORBIT UIN Bukittinggi tahun 2026.',
+        ]);
+
     }
 }
