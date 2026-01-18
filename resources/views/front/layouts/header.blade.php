@@ -41,7 +41,8 @@
                                      <li><a href="{{ route('profil.show', $menu_profile->slug) }}"><i
                                                  class="bi bi-menu-button"></i>{{ $menu_profile->name }}</a></li>
                                  @endforeach
-                                 <li><a href="{{ route("member") }}"><i class="bi bi-people"></i>Pengurus & Anggota</a></li>
+                                 <li><a href="{{ route("committe") }}"><i class="bi bi-people-fill"></i>Pengurus</a></li>
+                                 <li><a href="{{ route("member") }}"><i class="bi bi-people"></i>Anggota</a></li>
                              </ul>
                          </li>
                          <li class="nav-item dropdown dropdown-with-icon-style02">

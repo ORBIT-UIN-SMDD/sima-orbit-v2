@@ -28,7 +28,7 @@
             data-particle-options='{"particles": {"number": {"value": 5,"density": {"enable": true,"value_area": 1000}},"color":{"value":["#b7b9be", "#dd6531"]},"shape": {"type": "circle","stroke":{"width":0,"color":"#000000"}},"opacity": {"value": 0.5,"random": false,"anim": {"enable": false,"speed": 1,"sync": false}},"size": {"value": 8,"random": true,"anim": {"enable": false,"sync": true}},"move": {"enable": true,"speed":2,"direction": "right","random": false,"straight": false}},"interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": false,"mode": "repulse"},"onclick": {"enable": false,"mode": "push"},"resize": true}},"retina_detect": false}'
             class="position-absolute h-100 top-0 left-0 z-index-minus-1"></div>
         <div class="container">
-            <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2 justify-content-center mb-7"
+            <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 justify-content-center mb-7"
                 data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay":0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                 <!-- start features box item -->
                 @foreach ($list_member_field as $member_field)
