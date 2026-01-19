@@ -40,6 +40,9 @@ Route::post('committe/ajax', [App\Http\Controllers\Front\MenuProfileController::
 Route::get('member', [App\Http\Controllers\Front\MenuProfileController::class, 'member'])->name('member');
 Route::post('member/ajax', [App\Http\Controllers\Front\MenuProfileController::class, 'memberAjax'])->name('member.ajax');
 
+Route::prefix('alumni')->name('alumni.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Front\AlumniController::class, 'index'])->name('index');
+});
 
 Route::post('/login', [App\Http\Controllers\Front\AuthController::class, 'login'])->name('login');
 Route::post('/logout', [App\Http\Controllers\Front\AuthController::class, 'logout'])->name('logout');
