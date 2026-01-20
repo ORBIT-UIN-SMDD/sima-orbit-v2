@@ -34,10 +34,10 @@ class ProfileResource extends JsonResource
             'photo_url' => $this->getPhoto(),
             'is_active' => $this->is_active,
             'department' => $this->whenLoaded('department', function () {
-                return [
-                    'id' => $this->department->id,
-                    'name' => $this->department->name,
-                ];
+                return $this->department->name;
+            }),
+            'faculty' => $this->whenLoaded('department', function () {
+                return $this->department->faculty ? $this->department->faculty->name : null;
             }),
             'roles' => $this->whenLoaded('roles', function () {
                 return $this->roles->pluck('name');

@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthController extends Controller
 {
     /**
-     * Login user and create token
+     * Login - Authenticate user and issue token
      */
     public function login(Request $request)
     {
@@ -51,6 +51,7 @@ class AuthController extends Controller
                 'response' => Response::HTTP_UNAUTHORIZED,
                 'success' => false,
                 'message' => 'Email/NIM atau password salah',
+                'validation' => $validation,
                 'data' => null
             ], Response::HTTP_UNAUTHORIZED);
         }
@@ -66,6 +67,7 @@ class AuthController extends Controller
             'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Login berhasil',
+            'validation' => $validation,
             'data' => [
                 'user' => new ProfileResource($user),
                 'token' => $token,
@@ -75,7 +77,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout user (revoke token)
+     * Logout - Revoke the current user's token
      */
     public function logout(Request $request)
     {
@@ -90,7 +92,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get authenticated user
+     * Get Authenticated User
      */
     public function user(Request $request)
     {

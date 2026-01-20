@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ProfileController extends Controller
 {
     /**
-     * Get authenticated user profile
+     * Profile Show - Get authenticated user profile
      */
     public function show(Request $request)
     {
@@ -29,7 +29,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update authenticated user profile
+     * Profile Update - Update authenticated user profile
      */
     public function update(Request $request)
     {
@@ -106,7 +106,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update password
+     * Profile Update Password - Update authenticated user password
      */
     public function updatePassword(Request $request)
     {

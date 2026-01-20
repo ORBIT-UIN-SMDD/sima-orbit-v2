@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class NewsController extends Controller
 {
+    /**
+     * News Index - List all news with pagination
+     */
     public function index(Request $request)
     {
         try {
@@ -47,6 +50,9 @@ class NewsController extends Controller
         }
     }
 
+    /**
+     * News Show - Get news details by slug
+     */
     public function show($slug)
     {
         try {
@@ -85,6 +91,9 @@ class NewsController extends Controller
         }
     }
 
+    /**
+     * news Comment - Submit a comment to a news item
+     */
     public function comment(Request $request, $slug)
     {
         try {
