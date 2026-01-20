@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProfileResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProfileController extends Controller
 {
@@ -16,14 +18,14 @@ class ProfileController extends Controller
     public function show(Request $request)
     {
         $user = $request->user();
-        $user->photo_url = $user->getPhoto();
-        $user->load('roles', 'permissions');
+        $user->load('roles', 'permissions', 'department');
 
         return response()->json([
+            'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Data profile berhasil diambil',
-            'data' => $user
-        ], 200);
+            'data' => new ProfileResource($user)
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -60,12 +62,18 @@ class ProfileController extends Controller
             'photo.max' => 'Ukuran gambar maksimal 2MB',
         ]);
 
+        $validation = array_fill_keys(array_keys($request->all()), []);
         if ($validator->fails()) {
+            foreach ($validator->errors()->toArray() as $key => $errors) {
+                $validation[$key] = $errors;
+            }
             return response()->json([
+                'response' => Response::HTTP_BAD_REQUEST,
                 'success' => false,
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors()
-            ], 422);
+                'message' => 'Validation error occurred',
+                'validation' => $validation,
+                'data' => null
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         $data = $request->only([
@@ -87,13 +95,14 @@ class ProfileController extends Controller
         }
 
         $user->update($data);
-        $user->photo_url = $user->getPhoto();
+        $user->load('roles', 'permissions', 'department');
 
         return response()->json([
+            'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Profile berhasil diupdate',
-            'data' => $user
-        ], 200);
+            'data' => new ProfileResource($user)
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -111,12 +120,18 @@ class ProfileController extends Controller
             'password.confirmed' => 'Konfirmasi password tidak cocok',
         ]);
 
+        $validation = array_fill_keys(array_keys($request->all()), []);
         if ($validator->fails()) {
+            foreach ($validator->errors()->toArray() as $key => $errors) {
+                $validation[$key] = $errors;
+            }
             return response()->json([
+                'response' => Response::HTTP_BAD_REQUEST,
                 'success' => false,
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors()
-            ], 422);
+                'message' => 'Validation error occurred',
+                'validation' => $validation,
+                'data' => null
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         $user = $request->user();
@@ -124,9 +139,11 @@ class ProfileController extends Controller
         // Check current password
         if (!Hash::check($request->current_password, $user->password)) {
             return response()->json([
+                'response' => Response::HTTP_UNAUTHORIZED,
                 'success' => false,
-                'message' => 'Password saat ini salah'
-            ], 401);
+                'message' => 'Password saat ini salah',
+                'data' => null
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
         $user->update([
@@ -134,8 +151,10 @@ class ProfileController extends Controller
         ]);
 
         return response()->json([
+            'response' => Response::HTTP_OK,
             'success' => true,
-            'message' => 'Password berhasil diupdate'
-        ], 200);
+            'message' => 'Password berhasil diupdate',
+            'data' => null
+        ], Response::HTTP_OK);
     }
 }

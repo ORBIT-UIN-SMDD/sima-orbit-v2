@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProfileResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -25,12 +27,18 @@ class AuthController extends Controller
             'password.min' => 'Password minimal 6 karakter'
         ]);
 
+        $validation = array_fill_keys(array_keys($request->all()), []);
         if ($validator->fails()) {
+            foreach ($validator->errors()->toArray() as $key => $errors) {
+                $validation[$key] = $errors;
+            }
             return response()->json([
+                'response' => Response::HTTP_BAD_REQUEST,
                 'success' => false,
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors()
-            ], 422);
+                'message' => 'Validation error occurred',
+                'validation' => $validation,
+                'data' => null
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         // Determine login type (email or nim)
@@ -40,9 +48,11 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($request->input('password'), $user->password)) {
             return response()->json([
+                'response' => Response::HTTP_UNAUTHORIZED,
                 'success' => false,
-                'message' => 'Email/NIM atau password salah'
-            ], 401);
+                'message' => 'Email/NIM atau password salah',
+                'data' => null
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
         // Revoke old tokens (optional - for single device login)
@@ -50,16 +60,18 @@ class AuthController extends Controller
 
         // Create new token
         $token = $user->createToken('auth_token')->plainTextToken;
+        $user->load('roles', 'permissions', 'department');
 
         return response()->json([
+            'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Login berhasil',
             'data' => [
-                'user' => $user,
+                'user' => new ProfileResource($user),
                 'token' => $token,
                 'token_type' => 'Bearer'
             ]
-        ], 200);
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -70,9 +82,11 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
+            'response' => Response::HTTP_OK,
             'success' => true,
-            'message' => 'Logout berhasil'
-        ], 200);
+            'message' => 'Logout berhasil',
+            'data' => null
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,10 +94,14 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
+        $user = $request->user();
+        $user->load('roles', 'permissions', 'department');
+
         return response()->json([
+            'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Data user berhasil diambil',
-            'data' => $request->user()
-        ], 200);
+            'data' => new ProfileResource($user)
+        ], Response::HTTP_OK);
     }
 }

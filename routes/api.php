@@ -6,15 +6,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
-Route::post('/login', [AuthController::class, 'login']);
 
 // Protected routes
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', [AuthController::class, 'user']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+Route::prefix('/v1')->group(function () {
+    Route::prefix('/auth')->group(function () {
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
+        Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    });
 
-    // Profile routes
-    Route::get('/profile', [ProfileController::class, 'show']);
-    Route::post('/profile', [ProfileController::class, 'update']);
-    Route::put('/profile/password', [ProfileController::class, 'updatePassword']);
+    Route::prefix('/profile')->middleware('auth:sanctum')->group(function () {
+        // Profile routes
+        Route::get('/', [ProfileController::class, 'show']);
+        Route::post('/', [ProfileController::class, 'update']);
+        Route::put('/password', [ProfileController::class, 'updatePassword']);
+    });
+
+    // News routes
+    route::prefix('/news')->group(function () {
+        Route::get('/', [App\Http\Controllers\Api\NewsController::class, 'index']);
+        Route::get('/{slug}', [App\Http\Controllers\Api\NewsController::class, 'show']);
+        Route::post('/{slug}/comments', [App\Http\Controllers\Api\NewsController::class, 'comment'])->middleware('auth:sanctum');
+    });
+
+    
 });
