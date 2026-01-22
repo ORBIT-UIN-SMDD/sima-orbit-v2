@@ -23,11 +23,21 @@ Route::prefix('/v1')->group(function () {
     });
 
     // News routes
-    route::prefix('/news')->group(function () {
+    Route::prefix('/news')->group(function () {
         Route::get('/', [App\Http\Controllers\Api\NewsController::class, 'index']);
         Route::get('/{slug}', [App\Http\Controllers\Api\NewsController::class, 'show']);
         Route::post('/{slug}/comments', [App\Http\Controllers\Api\NewsController::class, 'comment'])->middleware('auth:sanctum');
     });
 
-    
+    // Division routes
+    Route::prefix('/divisions')->group(function () {
+        Route::get('/', [App\Http\Controllers\Api\DivisionController::class, 'index']);
+    });
+
+    Route::get('/committee/{slug?}', [App\Http\Controllers\Api\MemberController::class, 'committee']);
+    Route::get('/member/{slug?}', [App\Http\Controllers\Api\MemberController::class, 'member']);
+    Route::get('/alumni', [App\Http\Controllers\Api\MemberController::class, 'alumni']);
+    Route::get('/periods', [App\Http\Controllers\Api\MemberController::class, 'periods']);
+
+
 });
