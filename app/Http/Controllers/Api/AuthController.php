@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProfileResource;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,7 +70,7 @@ class AuthController extends Controller
             'message' => 'Login berhasil',
             'validation' => $validation,
             'data' => [
-                'user' => new ProfileResource($user),
+                'profile' => new UserResource($user),
                 'token' => $token,
                 'token_type' => 'Bearer'
             ]
@@ -103,7 +104,7 @@ class AuthController extends Controller
             'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Data user berhasil diambil',
-            'data' => new ProfileResource($user)
+            'data' => new UserResource($user)
         ], Response::HTTP_OK);
     }
 }

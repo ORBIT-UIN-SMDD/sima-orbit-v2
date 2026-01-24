@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MemberResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResourceResource;
 use App\Models\Period;
 use App\Models\PeriodUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Symfony\Component\HttpFoundation\Response;
 
-class MemberController extends Controller
+class UserController extends Controller
 {
     public function member(Request $request, $slug = null)
     {
@@ -39,7 +41,9 @@ class MemberController extends Controller
                 'response' => 200,
                 'success' => true,
                 'message' => 'Data anggota berhasil diambil',
-                'data' => MemberResource::collection($data)
+                'data' => $data->map(function ($periodUser) {
+                    return new UserResource($periodUser->user);
+                }),
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
@@ -77,7 +81,9 @@ class MemberController extends Controller
                 'response' => 200,
                 'success' => true,
                 'message' => 'Data pengurus berhasil diambil',
-                'data' => MemberResource::collection($data)
+                'data' => $data->map(function ($periodUser) {
+                    return new UserResource($periodUser->user);
+                }),
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
@@ -88,7 +94,7 @@ class MemberController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-    public function Alumni(Request $request)
+    public function alumni(Request $request)
     {
         $q = $request->q;
         try {
@@ -109,13 +115,47 @@ class MemberController extends Controller
                 'response' => 200,
                 'success' => true,
                 'message' => 'Data pengurus berhasil diambil',
-                'data' => MemberResource::collection($data)
+                'data' => $data->map(function ($periodUser) {
+                    return new UserResource($periodUser->user);
+                }),
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
                 'response' => 500,
                 'success' => false,
                 'message' => 'Terjadi kesalahan saat mengambil data pengurus: ' . $th->getMessage(),
+                'data' => null
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function all(Request $request)
+    {
+        $q = $request->q;
+        $perPage = $request->input('perPage', 30);
+        try {
+            $data = PeriodUser::with('user', 'memberField', 'period')
+                ->when($q, function ($query) use ($q) {
+                    $query->whereHas('user', function ($qUser) use ($q) {
+                        $qUser->where('name', 'like', '%' . $q . '%')
+                            ->orWhere('nim', 'like', '%' . $q . '%');
+                    });
+                })
+                ->paginate($perPage);
+
+            return response()->json([
+                'response' => 200,
+                'success' => true,
+                'message' => 'Data anggota berhasil diambil',
+                'data' => $data->map(function ($periodUser) {
+                    return new UserResource($periodUser->user);
+                }),
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'response' => 500,
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat mengambil data anggota: ' . $th->getMessage(),
                 'data' => null
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

@@ -34,10 +34,19 @@ Route::prefix('/v1')->group(function () {
         Route::get('/', [App\Http\Controllers\Api\DivisionController::class, 'index']);
     });
 
-    Route::get('/committee/{slug?}', [App\Http\Controllers\Api\MemberController::class, 'committee']);
-    Route::get('/member/{slug?}', [App\Http\Controllers\Api\MemberController::class, 'member']);
-    Route::get('/alumni', [App\Http\Controllers\Api\MemberController::class, 'alumni']);
-    Route::get('/periods', [App\Http\Controllers\Api\MemberController::class, 'periods']);
+    Route::prefix('/users')->middleware('auth:sanctum')->group(function () {
+        Route::get('/committee/{slug?}', [App\Http\Controllers\Api\UserController::class, 'committee']);
+        Route::get('/member/{slug?}', [App\Http\Controllers\Api\UserController::class, 'member']);
+        Route::get('/alumni', [App\Http\Controllers\Api\UserController::class, 'alumni']);
+        Route::get('/all', [App\Http\Controllers\Api\UserController::class, 'all']);
+        Route::get('/periods', [App\Http\Controllers\Api\UserController::class, 'periods']);
+    });
+
+    Route::prefix('/chat')->middleware('auth:sanctum')->group(function () {
+        Route::get('/conversations', [App\Http\Controllers\Api\ChatController::class, 'conversations']);
+        Route::post('/conversation', [App\Http\Controllers\Api\ChatController::class, 'storeConversation']);
+        Route::get('/conversations/{conversationId}/messages', [App\Http\Controllers\Api\ChatController::class, 'messages']);
+    });
 
 
 });

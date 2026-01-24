@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProfileResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,7 @@ class ProfileController extends Controller
             'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Data profile berhasil diambil',
-            'data' => new ProfileResource($user)
+            'data' => new UserResource($user)
         ], Response::HTTP_OK);
     }
 
@@ -101,7 +102,7 @@ class ProfileController extends Controller
             'response' => Response::HTTP_OK,
             'success' => true,
             'message' => 'Profile berhasil diupdate',
-            'data' => new ProfileResource($user)
+            'data' => new UserResource($user)
         ], Response::HTTP_OK);
     }
 

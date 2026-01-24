@@ -126,6 +126,7 @@ class NewsController extends Controller
                 'response' => Response::HTTP_CREATED,
                 'success' => true,
                 'message' => 'Comment submitted successfully',
+                'validation' => [],
                 'data' => $newsComment,
             ], Response::HTTP_CREATED);
         } catch (\Throwable $th) {
@@ -133,6 +134,8 @@ class NewsController extends Controller
                 'response' => Response::HTTP_BAD_REQUEST,
                 'success' => false,
                 'message' => $th->getMessage(),
+                'validation' => [],
+                'data' => null
             ], Response::HTTP_BAD_REQUEST);
         }
     }

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProfileResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -45,6 +45,14 @@ class ProfileResource extends JsonResource
             'permissions' => $this->whenLoaded('permissions', function () {
                 return $this->permissions->pluck('name');
             }),
+            'periods' => $this->periodUsers->map(function ($periodUser) {
+                return [
+                    'period_name' => $periodUser->period->name,
+                    'period_slug' => $periodUser->period->slug,
+                    'role' => $periodUser->role,
+                    'member_field' => $periodUser->memberField->name ?? null,
+                ];
+            })->toArray(),
             'email_verified_at' => $this->email_verified_at?->format('Y-m-d H:i:s'),
             'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
